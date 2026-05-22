@@ -1,11 +1,10 @@
-ARG L4T_VER
-FROM nvcr.io/nvidia/l4t-base:${L4T_VER?l4t_version_not_provided}
+FROM l4t-24:r36.2.0
 
 # Sourced from https://github.com/osrf/docker_images/blob/master/ros/jazzy/ubuntu/noble/ros-core/Dockerfile
 
 # setup timezone
 RUN echo 'Etc/UTC' > /etc/timezone && \
-    ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+    ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     apt-get update && \
     apt-get install -q -y --no-install-recommends tzdata && \
     rm -rf /var/lib/apt/lists/*

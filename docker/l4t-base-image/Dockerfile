@@ -51,7 +51,7 @@ RUN apt-get update && \
         parted \
         pciutils \
         python3 \
-        python3-distutils \
+        python3-setuptools \
         python3-pexpect \
         python3-numpy \
         sox \
