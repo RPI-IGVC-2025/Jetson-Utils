@@ -1,0 +1,1 @@
+fs=/usr/local/zed/tools && "$fs/$(ls $fs | grep -iw $1)"
