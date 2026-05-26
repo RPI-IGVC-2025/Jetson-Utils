@@ -8,19 +8,15 @@ ENV NVIDIA_DRIVER_CAPABILITIES=all
 
 COPY jetson-ota-public.key /etc/jetson-ota-public.key
 
-# RUN apt-get update && \
-#     apt-get install -y --no-install-recommends \
-#         gnupg2 \
-#         ca-certificates && \
-#     apt-key add /etc/jetson-ota-public.key && \
-#     echo "deb https://repo.download.nvidia.com/jetson/common ${RELEASE} main" \
-#         >> /etc/apt/sources.list && \
-#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        gnupg2 \
+        ca-certificates && \
+    apt-key add /etc/jetson-ota-public.key && \
+    echo "deb https://repo.download.nvidia.com/jetson/common ${RELEASE} main" \
+        >> /etc/apt/sources.list && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /etc/apt/keyrings && \
-    gpg --dearmor -o /etc/apt/keyrings/jetson-ota.gpg /etc/jetson-ota-public.key && \
-    echo "deb [signed-by=/etc/apt/keyrings/jetson-ota.gpg] https://repo.download.nvidia.com/jetson/common ${RELEASE} main" \
-        > /etc/apt/sources.list.d/jetson.list
 
 RUN apt-get update && \
     apt-get upgrade -y && \
