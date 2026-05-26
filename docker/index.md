@@ -9,6 +9,8 @@ Dependencies:
 
 `xhost +`
 
+`sudo chown $USER:$USER ~/.gnupg/*
+
 Building the image(s): 
 
 ```
