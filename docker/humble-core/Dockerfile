@@ -1,10 +1,10 @@
-FROM l4t-24:r36.2.0
+FROM nvcr.io/nvidia/l4t-jetpack:r36.4.0
 
-# Sourced from https://github.com/osrf/docker_images/blob/master/ros/jazzy/ubuntu/noble/ros-core/Dockerfile
+# Sourced from https://github.com/osrf/docker_images/blob/master/ros/humble/ubuntu/jammy/ros-core/Dockerfile
 
 # setup timezone
 RUN echo 'Etc/UTC' > /etc/timezone && \
-    ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     apt-get update && \
     apt-get install -q -y --no-install-recommends tzdata && \
     rm -rf /var/lib/apt/lists/*
@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 
 
 # Setup ROS Apt sources
-RUN curl -L -s -f -o /tmp/ros2-apt-source.deb https://github.com/ros-infrastructure/ros-apt-source/releases/download/1.2.0/ros2-apt-source_1.2.0.noble_all.deb \
-    && echo "0804d9b13db770eb87019be414cd78378835228ad5fa801fc88758596dd8f7e5 */tmp/ros2-apt-source.deb" | sha256sum --strict --check \
+RUN curl -L -s -f -o /tmp/ros2-apt-source.deb https://github.com/ros-infrastructure/ros-apt-source/releases/download/1.2.0/ros2-apt-source_1.2.0.jammy_all.deb \
+    && echo "767884cf4ed03116b9d64438930a832ed854147ae435279a7924dfdf60f94433 */tmp/ros2-apt-source.deb" | sha256sum --strict --check \
     && apt-get update \
     && apt-get install /tmp/ros2-apt-source.deb \
     && rm -f /tmp/ros2-apt-source.deb \
@@ -30,11 +30,11 @@ RUN curl -L -s -f -o /tmp/ros2-apt-source.deb https://github.com/ros-infrastruct
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
-ENV ROS_DISTRO=jazzy
+ENV ROS_DISTRO=humble
 
 # install ros2 packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-jazzy-ros-core=0.11.0-1* \
+    ros-humble-ros-core=0.10.0-1* \
     && rm -rf /var/lib/apt/lists/*
 
 # setup entrypoint
